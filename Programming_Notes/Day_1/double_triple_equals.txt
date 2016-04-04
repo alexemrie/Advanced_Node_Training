@@ -1,0 +1,9 @@
+== allows coercion
+=== disallows coercion
+
+use cases for coercion... want to know if
+
+Want to know if picked option 3
+    var foo = "3";
+    if (foo === 3 || foo === "3") {}  //okay, but might be confusing
+    if (foo == 3) {}                  //better!

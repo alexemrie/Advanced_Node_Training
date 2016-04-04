@@ -1,0 +1,61 @@
+"Native Types" => Not called types in the spec
+  *Objects && functions
+
+  String String()
+  Number Number()
+  Boolean Boolean()
+  Function Function()
+  Object Object()
+  Array Array()
+  RegExp RegExp()
+  Date Date()
+  Error Error()
+
+**Wrappers around primitive values... not the primitive values themselves
+  var foo = new String("foo");
+  foo;
+        * In chrome developer tools this would return the following...
+        String {0: "f", 1: "o", 2: "o", length: 3, [[PrimitiveValue]]: "foo"}
+        * Firefox
+        String {"foo", 4 more}
+  typeof foo;            //"object"
+  foo instanceof String; //true
+
+  foo = String("foo"); ** without the new keyword
+  typeof foo;            //"string"
+
+  var foo = new Number(42);
+  foo;
+        * In chrome developer tools this would return the following...
+          Number {[[PrimitiveValue]]: 42}
+        *Firefox
+          Number {42}
+
+  foo = new Number(37);
+  typeof foo;       //"object"
+  foo = Number(37);
+  typeof foo;       //"number"
+    **Better to use Natives and not the constructor form using "new" keyword for Numbers and Strings && Arrays
+
+_________________________
+var foo;
+foo = new Array(1,2,3); //don't!
+foo = [1,2,3];          //do!
+
+if do new Array with one argument passed to it => will return Array of length of number passed in
+foo = new Array(5);
+foo;      //[undefined × 5]
+
+foo = new Object();   //don't
+foo.a = 1;
+
+foo = {a: 1}          //do! preferred
+_________________________
+When to use constructors for native types...
+
+RegExp
+  RegExp... ** if need to do it dynamically in runtime
+  var foo;
+  foo = new RegExp("a*b", "g");
+
+  foo = /a * b/g;

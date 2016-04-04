@@ -1,0 +1,32 @@
+Kyle Simpson
+
+Active Contributions
+  LABjs
+  grips
+  asynquence => library for managing asynchronous programming
+  "You Don't Know JS"
+
+MDN
+  Mozilla developer network
+  Authority on JavaScript "https://developer.mozilla.org/en-US/docs/JavaScript"
+
+Style Guide
+  Agreeing on style guide within team reduces bugs accompanied by code review
+  https://github.com/rwldrn/idiomatic.js
+
+JavaScript spec
+  http://www.ecma-international.org/ecma-262/6.0/
+
+
+Upcoming stuff in the language
+  https://github.com/tc39/ecma262#current-proposals
+
+Quotes...
+  "JavaScript and Java are as related as ham and hamster"
+  Code is fundamentally about communicating between your future self and others
+  "If you don't know why a piece of code works, you can't know why it might break"
+  "Any sufficiently unlearned technology is indistinguishable from magic"
+
+Never use Double Equals to false/true...
+  == false
+  == true

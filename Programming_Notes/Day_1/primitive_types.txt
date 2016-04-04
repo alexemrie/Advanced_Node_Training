@@ -1,0 +1,132 @@
+JS Syntax
+
+________________
+Primitive Types
+
+Directly defined in the specs...
+  Types associated with values... not types associated with variables
+
+  6 Primitive Types (prior to ES6) => Value Types
+    undefined
+    string
+    number
+    boolean
+    object
+    null
+
+  7th Type
+    symbol
+
+
+  Sub-type of the object type
+    *function
+
+typeof => returns 1 of 6 primitive types
+  typeof foo;   //"undefined"
+    *What is type of value currently in foo
+    *Not the typeof foo itself because typeof returns value types
+
+  typeof "foo"; //"string"
+  typeof 123;   //"number"
+
+
+**Bug***Bug***Bug****Bug*****Bug********
+    typeof null; //"object"... WTF!
+
+
+typeof typeof 2; //"string"
+
+_________________
+Special Values...
+  NaN("not a number")
+  Infinity, -Infinity
+  null
+  undefined(void)
+  +0, -0
+
+**notice that there is a null type && a null value
+- - - - - - - -
+NaN...
+  var a = "a" / 2; //string "a" is fundamentally not a number => fails to coerce into number => returns NaN because tried to coerce but failed
+
+    a;            //NaN
+    typeof a;     // "number"
+      *Tried to do mathematical operation => failed but still tried to perform mathematical operation => closest type that makes sense is "number"
+
+      *isNaN attempts to coerce value inside parameter to number prior to evaluating (Bug)
+    isNaN(a);     //true
+      => attempts to coerce a to number => can't do it so returns NaN => isNaN(NaN) returns true
+    isNaN("foo"); //true
+
+  *NaN only value that is not equal to itself => does not follow the identity property as defined in mathematics
+  **Fixed by the Number.isNaN in ES6
+
+  Polyfill pattern
+    in non-ES6 environment Number.isNaN will return false => want to return true to patch so put !false == true
+
+  if (!Number.isNaN) {
+    Number.isNaN == function(num) {
+      return (
+        typeof num === "number" && window.isNaN(num);
+      );
+    }
+  }
+
+  if (!Number.isNaN) {
+    Number.isNaN = function(num) {
+      return num !== num;
+    }
+  }
+---------------
+Negative 0 => -0
+  Multiply/ Divide 0 by negative number intuitively would return 0
+
+  0 === -0 //true
+    reverse case of the NaN example whereby NaN !== NaN => true
+
+  *Case where problem might be with console or other environment you are running (i.e. Node)
+  **Browser and version might behave differently
+
+  Arithmetic Standards
+    IEEE Standard for Floating-Point Arithmetic (IEEE 754)
+      Differentiates between negative 0 and positive 0
+
+  function isNeg0(x) {
+    return x === 0 && (1/x) === -Infinity;
+  }
+  isNeg0(0 / -3); //true... yay!
+  isNeg0(0 / 3);  //false... yay!
+
+  *use case => gaming, absolute value of something defines how fast it is moving, sign determines direction that character might be facing
+_________________
+Object.is(..) => Equivalent to quadruple equals => "===="
+  ES6
+    Does not lie as in case of 0's and negative numbers
+    Use when testing for equality with NaN's and negative 0's
+    Using non-coercive comparisons
+
+  Object.is("foo", NaN);  //false
+  Object.is(NaN, NaN);    //true
+
+  Object.is(0, -0);       //false
+  Object.is(0, 0);        //true
+
+_________________
+Review...
+
+var baz = 2;
+typeof baz;   //"number"
+
+var baz;      *Does not redeclare a value if in the same scope
+typeof baz;   //"number"
+
+baz = null;   *Bug in JS library where typeof null returns "object"
+typeof baz;   //"object"
+
+baz = "baz" * 3;
+baz;          //"NaN"
+typeof baz;   //"number"
+
+baz = 1 / 0;
+baz;          //Infinity
+typeof baz;   //"number"
