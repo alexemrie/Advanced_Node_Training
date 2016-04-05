@@ -7,3 +7,49 @@ Want to know if picked option 3
     var foo = "3";
     if (foo === 3 || foo === "3") {}  //okay, but might be confusing
     if (foo == 3) {}                  //better!
+
+Faster to use coercion than to write out triple equal pattern
+
+var x = 3;
+var y = "3";
+var z = "3";
+
+x == y;               //faster
+x === y || x === z;
+
+_____________________
+
+function foo(obj) {
+  obj.a = "foo";                  ** . method is dereferencing
+  obj.b = [1,2,3];                ** . method dereferences b previously pointing to [7,8,9] and repoints to new array [1,2,3]
+  obj = {a: "baz", b: [4,5,6]};   ** obj will be cleaned by garbage collection following completion of this function
+}
+
+var o = { a: "bar", b: [7,8,9]}
+var a = o.a;                      ** a points to primitive type "bar"
+var b = o.b;                      ** b points to reference of array [7,8,9] in memory
+
+foo(o);
+
+o.a; // "foo"
+o.b; // [1,2,3]
+a;   // "bar"
+b;   // [7,8,9]
+
+____________________
+Variable pointing...
+  var obj = { b: [1,2,3]};
+  var b = obj.b;    // b = [1,2,3]
+
+  obj.b; // [1,2,3]
+  b;     // [1,2,3]
+
+  obj.b = null;   // obj = {b: null}
+
+  obj.b;  // null
+  b;      // [1,2,3]
+
+  b = null; // b = null
+
+  obj.b;  //null
+  b;      //null

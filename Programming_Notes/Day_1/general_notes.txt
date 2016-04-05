@@ -30,3 +30,8 @@ Quotes...
 Never use Double Equals to false/true...
   == false
   == true
+
+Variables are a reference to a value
+  --> no such thing as a pointer to another pointer
+  --> pointing laptop example
+  --> dereferencing
