@@ -5,3 +5,18 @@ Mistake to write JS assuming significant new lines (as opposed to semicolons)
 ASI => "Automatic Semicolon Insertion"
 
 LR1 Parser => 1 level of backtracking
+
+Difference between capturing and bubbling and how fits into Propagation
+  Capturing phase...
+
+
+
+
+Three Methods for cancelling...
+
+In Mac...
+python -m SimpleHTTPServer 8080
+
+in terminal...
+
+rel="js-modal"

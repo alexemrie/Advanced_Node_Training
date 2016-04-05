@@ -1,5 +1,7 @@
 Event Propagation...
 
+See Exercise 3!!
+
 Broken into 2 phases
   1 -> Capturing
   2 -> Bubbling
@@ -22,7 +24,22 @@ Capturing...(happens first)
   Event Propagation occurs and it begins to bubble back up the DOM
 
 *****************************************
+  Can set up bubbling or capturing phase handlers
+  Default is false which results in bubbling
 
+  All handlers work on bubbling stage excepts addEventListener with last argument true,
+    which is the only way to catch the event on capturing stage.
+
+  JQuery does bubbling
+
+  item.addEventListener("click", doSomething);
+
+  When you don't specify the third argument,
+  the default behavior is to listen to your event during the bubbling phase.
+  It's equivalent to passing in a false value as the argument.
+
+
+*****************************************
 
 $(document).ready(function(){
 	var mobsters = ["Lou","Frankie","Max"];
@@ -57,7 +74,7 @@ Not all events are cancelable... (Because of screen readers)
 ******************************************
 Canceling Event Handlers
   preventDefault();
-  stopPropagation();
+  stopPropagation(); // stop vertical bubbling && capturing
   stopImmediatePropagation();
 
 
@@ -80,3 +97,18 @@ http://fuelyourcoding.com/jquery-events-stop-misusing-return-false/
 
   evt.stopPropaation(); Vertically stops going down the DOM
   evt.stopImmediatePropagation(); Stops both horizontal and vertical event propagation (i.e. if multiple click handlers attached to same element)
+
+*****************************************
+Event Driven Architecture
+
+Event Emitter Library...
+//create an instance of the event hub
+var EVT = new EventEmitter2();
+
+//later
+EVT.on("foobar", function(){
+  console.log("foobar fired!");
+});
+
+//even later
+EVT.emit("foobar");
