@@ -1,0 +1,42 @@
+Jquery => Curly string with three squiggly lines and happy face at end of third line
+
+"~" general sibling selector
+
+$("#foo ~ li.bar > p") {
+  .addClass("highlighted!")
+  .attr({
+    title: "look at me!"
+  });
+}
+
+left to right? CSS
+right to left? JQuery
+
+More efficient to go start at smiley face and go backwards
+  start <-----------
+
+
+________________________
+
+Context setting...
+
+var $bars = $("#foo ~ li.bar");
+
+$("> p", $bars) {
+  .addClass("highlighted")
+  .attr({
+    title: "look at me!"
+  })
+}
+_______________________
+Iterations & Performance
+
+var $bars = $("#foo ~ li.bar");
+
+$bars.children("p").each(function(){
+  $(this);
+  .addClass("highlighted");
+  .attr({
+    title: "Look at me!"
+  });
+});

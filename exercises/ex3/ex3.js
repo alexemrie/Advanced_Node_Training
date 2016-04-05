@@ -24,6 +24,17 @@ function addCurrentNote() {
 function showHelp() {
 	$("#help").show();
 	// TODO: listen for how to close the help box
+
+	document.addEventListener("click", function handleClick(evt) {
+		evt.preventDefault();
+		evt.stopPropagation();
+		evt.stopImmediatePropagation();
+
+		document.removeEventListener("click", handleClick, true) //unbind the event handler
+
+		hideHelp();
+	}, true);
+	//true adds to capturing phase
 }
 
 function hideHelp() {
@@ -31,6 +42,7 @@ function hideHelp() {
 }
 
 function init() {
+
 	// build the list from the "database"
 	for (i=0; i<notes.length; i++) {
 		addNote(notes[i]);
@@ -63,9 +75,17 @@ function init() {
 
 	// listen for clicks to activate border of notes area
 	// TODO!
+	var $notes = $("#notes");
 
-	// listen for clicks on note elements
-	// TODO!
+	$notes.on("click", ".note", function(evt){
+		evt.preventDefault(); //prevents redirecting to link in a href
+		evt.stopPropagation();
+
+		$notes.addClass("active");
+
+		$("#notes > .note").removeClass("highlighted");
+		$(evt.target).addClass("highlighted");
+	});
 }
 
 $(document).ready(init);

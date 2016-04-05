@@ -1,0 +1,82 @@
+Event Propagation...
+
+Broken into 2 phases
+  1 -> Capturing
+  2 -> Bubbling
+
+  Capturing --> Bubbling
+
+Capturing...(happens first)
+
+
+  Document
+    paragraph (element1)
+      list  (element2)
+
+  When click on button, event starts at the outermost element (the Document).
+  Makes itself available to be observed starting with the outermost element.
+  Works way down until reaches the actual element that you clicked on.
+  Capturing phase occurs.
+  Activation occurs where actually fires on the element.
+
+  Event Propagation occurs and it begins to bubble back up the DOM
+
+*****************************************
+
+
+$(document).ready(function(){
+	var mobsters = ["Lou","Frankie","Max"];
+	var $li;
+	var $hit_list = $("#hit_list");
+
+	for (var i=0; i<mobsters.length; i++) {
+		$li = $("<li></li>")
+		.text(mobsters[i]);
+
+		$hit_list.append($li);
+	}
+
+
+	$hit_list
+	.on("click","> li",function(evt){    //click event handler takes optional second selector parameter
+		var who = $(evt.target).text();
+		alert("You just shot " + who);
+	});
+});
+
+******************************************
+
+Not all events are cancelable... (Because of screen readers)
+  Focus
+  Change
+
+  *Do not Bubble!
+  *But they do Capture!
+
+
+******************************************
+Canceling Event Handlers
+  preventDefault();
+  stopPropagation();
+  stopImmediatePropagation();
+
+
+The "return false" problem...
+  Return false does preventDefault() && stopPropagation()
+  Also stops propagation as opposed to simply preventing default behavior
+
+  $("a.toggle").click(function () {
+    $("#mydiv").toggle();
+    return false; // Prevent browser from visiting `#`
+  });
+
+**better to choose 1 of 3 explicitly!!!
+
+http://fuelyourcoding.com/jquery-events-stop-misusing-return-false/
+
+  evt.preventDefault();
+
+  **Prevents default behavior (i.e. click on a tag will redirect)
+
+  evt.stopPropaation(); Vertically stops going down the DOM
+  evt.stopImmediatePropagation(); Stops both horizontal and vertical event propagation (i.e. if multiple click handlers attached to same element)

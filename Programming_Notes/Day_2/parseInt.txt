@@ -1,0 +1,38 @@
+Proper use of parseInt is to parse an integer out of a string
+parseInt("string", base)
+
+
+1 divided by 0 returns infinity
+1/0 => Infinity
+
+parseInt(1/0,19);   //18
+
+*Base 19 => valid characters 0-9, A - I
+
+http://stackoverflow.com/questions/11340673/why-does-parseint1-0-19-return-18
+
+Base 19   Base 10 (decimal)
+---------------------------
+   0            0
+   1            1
+   2            2
+   3            3
+   4            4
+   5            5
+   6            6
+   7            7
+   8            8
+   9            9
+   a            10
+   b            11
+   c            12
+   d            13
+   e            14
+   f            15
+   g            16
+   h            17
+   i            18
+
+What happens next is that parseInt scans the input "Infinity" to find which part of it can be parsed and stops after accepting the first I (because n is not a valid digit in base 19).
+
+Therefore it behaves as if you called parseInt("I", 19), which converts to decimal 18 by the table above.

@@ -1,0 +1,7 @@
+Semicolon free programming fails to create readable code
+
+Mistake to write JS assuming significant new lines (as opposed to semicolons)
+
+ASI => "Automatic Semicolon Insertion"
+
+LR1 Parser => 1 level of backtracking
