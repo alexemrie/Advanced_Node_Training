@@ -1,0 +1,87 @@
+4 Rules of the This Keyword
+
+1 --> New Keyword
+2 --> Explicit Binding
+3 --> Implicit Binding (This keyword on call site where call site is "context site")
+4 --> Default => Strict mode says undefined (Non-Strict Mode becomes Global)
+
+**********************************************
+
+New Keyword
+
+Creates a new object out of thin air
+Creates a linkage to the new object
+Function is invoked with that object as the keyword this
+Implicitly returns the created object
+
+function Foo(who) {
+  this.me == who;
+}
+
+Foo.prototype.identify = function(){
+  return "I am " + this.me;
+}
+
+var a1 = new Foo("a1");
+var a2 = new Foo("a2");
+
+a2.speak = function(){      //adds method speak directly to object pointed to by variable a2
+  alert("Hello, " + this.identify() + ".");
+};
+
+**********************************************
+See slide (208-209)
+
+
+Object  --  .prototype  -->  [toString, valueOf, etc...
+                             |  __proto__
+        <-  .constructor --  |                       ]
+
+
+
+Foo  --  .prototype  -->     [ identify
+                             |
+        <-  .constructor --  |                       ]
+
+
+^                        ^
+|                        |
+a1                        a2
+me                        me
+                          speak
+
+
+
+
+**********************************************
+
+Prototypal Linkage
+
+a1.constructor === Foo; //true, but how?
+
+All objects get linkage to an internal property or "internal slot"(only available to JavaScript engine) [[Prototype]]
+Hidden linkage between every object and another object.
+When ask for property on object, JavaScript asks whether property exists on that object
+  =>follow internal linkage to other object and see's if that object has that property (Prototype Chain)
+  Ex: a2.constructor...
+      => a2 object has properties "me" and "speak", no property "constructor"
+      => follows [[Prototype]] linkage chain to arrive at object created by new keyword when object initially created
+      => This object has property "ixdentity" and method ".constructor" linking back to function Foo
+
+[[Prototype]] Linkage comes from the time we create the object
+
+
+OLOO: "Objects Linked to Other Objects"
+
+Downside of "delegation design" pattern is that everything is public, as opposed to Module Design pattern whereby
+  things are hidden
+**********************************************
+
+"Dunder Proto" --> Double Underscore Prototype (Temporary hack that became permanent); public property that exposes the hidden internal prototype
+
+a1.__proto__ == Foo.prototype;
+
+
+Object.prototype.__proto__ = function(){
+return this[[Prototype]];
+};
