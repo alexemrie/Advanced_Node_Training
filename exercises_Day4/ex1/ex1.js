@@ -23,11 +23,17 @@ function output(text) {
 function getFile(file) {
 	fakeAjax(file,function(text){
 		// what do we do here?
-		
 
+		processFile(file, text);
 
 	});
 }
+
+function processFile(file, text) {
+
+}
+
+var responses = {};
 
 // request all files at once in "parallel"
 getFile("file1");

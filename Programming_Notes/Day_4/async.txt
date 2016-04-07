@@ -1,0 +1,8 @@
+See Day 4 exercise 2...
+
+
+Able to pass around future values... i.e. if calculation takes awhile
+
+Eager vs Lazy systems
+
+"Thunk" => function that contains all the logic it needs
