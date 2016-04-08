@@ -1,4 +1,22 @@
 function handleHTTP(req,res) {
+	if (req.method == "GET"){
+		if (req.url == "/"){
+			res.writeHead(200, { 										//http status code, other headers
+				"Content-Type": "text/plain"
+			});
+
+			res.write("Hello:" + Math.random());
+			res.end();																	//need to end the stream
+		}
+		else {
+			res.writeHead(403);
+			res.end();
+		}
+	}
+	else {
+		res.writeHead(403);
+		res.end();
+	}
 }
 
 var
