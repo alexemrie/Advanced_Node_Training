@@ -1,0 +1,68 @@
+Promises
+
+Eager Asynchronous Thunk
+
+  --> Thunk = Wrapper around a value even though don't have it concretely present yet
+  --> Promises take this a step further as promise fulfillment happens only once, either success or error
+
+***********************************
+
+sequence = automatically chained promises
+Normalize sychronous and asynchronous behavior
+
+See Exercise 6 for Asynquence library
+
+***********************************
+Generators (Special kinds of functions)
+
+Functions generally run to completion (no other function can run while another is running)... Single threaded
+
+Generators gets to decide where it wants to yield control back to the engine
+Yield keyword "pauses"
+next keyword continues iterating through the function
+generators are functions that can start and stop, as opposed to running to completion
+
+* after function keyword
+
+function* gen() {
+  console.log("hello");
+  yield;
+  console.log("world");
+}
+
+var it = gen();   // where "it" is an iterator
+                  // generator has not started running yet
+
+it.next();        // Hello
+                  // next keyword has a return value inside iterator result object that is the status of the iterator, message passing system
+it.next();        // World
+
+*********
+function getData(d) {
+  setTimeout(function(){ run(d)}, 1000);
+}
+
+var run = corotuine(function*(){
+  var x = 1 + (yield getData(10));      //getData could be ajax call that is asynchronous but code within generator looks synchronous
+  var y = 1 + (yield getData(30));
+  var answer = (yield getData(
+    "Meaning of life: " + (x + y);
+  ));
+
+  console.log(answer);
+});
+
+run();
+
+*********************************************************
+Generators & Promises Together!
+
+function getData(d){
+  return ASQ(function(done){          //Sequence acting as a promise
+    setTimeout(function(){
+      done(d)
+    }, 1000);
+  });
+}
+
+ASQ()

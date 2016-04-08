@@ -25,11 +25,6 @@ function getFile(file) {
 	});
 }
 
-// Request all files at once in
-// "parallel" via `getFile(..)`.
-//
-// Render as each one finishes,
-// but only once previous rendering
-// is done.
-
-// ???
+var s1 = get("file1");
+var s2 = get("file2");
+var s3 = get("file3");
