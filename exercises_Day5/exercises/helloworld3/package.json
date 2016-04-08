@@ -7,6 +7,18 @@
 		"hello",
 		"world"
 	],
+	"dependencies":[
+		"asynquence": "~0.9.0",
+		"asynquence-contrib": "~0.26.0"
+	],
 	"author": "Who am I?",
 	"license": "MIT"
 }
+
+
+//initialized via npm init from command line
+//main is the most important... --> when require this package what does that actually mean?
+//semver.org --> semantic versioning (Ex: '0.0.1-a')
+//~ gives patch updates up until reaching next significant digit
+
+//npm publish will put on to npm page for public usage

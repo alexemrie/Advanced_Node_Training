@@ -1,0 +1,42 @@
+Netflix Walmart Paypal use Node backend
+
+Walmart Black Friday memory usage extremely low
+
+JavaScript engine has know concept of Input/ Output
+  --> relies upon I/O to be given by hosting environment
+  --> Node creates bindings in JS to surround server or machine environment
+
+NPM = "NPM Package Manager" (a.k.a. "Nimble Pirate Manager")
+
+Kyle Simpson username = "getify"
+  --> native-promise-only
+
+Minimist
+**********************
+Posix
+  --> Node provides a Posix environment to our JavaScript
+  console.log("hello world");           //interpreted low level stream operation
+  process.stdout.write("hello world");  //low level stream operation
+
+console.log = function(str) {
+  process.stdout.write(str) + "\n";
+}
+
+**********************
+node 1.js 2>/dev/null       //pipe results of line 2 to dev/null
+**********************
+Documenting command line programs
+
+arg(v) => value of arguments
+  console.log(process.argv);
+
+arg(c) => number of arguments
+
+node 1.js --foo=bar
+// [ '--foo=bar' ]
+
+node 1.js foobar
+// [ 'foobar' ]
+
+console.log(process.argv.slice(2));
+node
