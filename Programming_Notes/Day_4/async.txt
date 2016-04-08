@@ -6,3 +6,80 @@ Able to pass around future values... i.e. if calculation takes awhile
 Eager vs Lazy systems
 
 "Thunk" => function that contains all the logic it needs
+
+Cheeseburger
+  Go to order cheeseburger...
+  Don't hand you cheeseburger right away but give you receipt with order number
+  Don't know how long it will be until you get cheeseburger
+  Able to start thinking about how you may want to eat this cheeseburger based on "promise" that you will recieve it
+  Cheeseburger = future value
+
+**********************************
+
+Promises (a.k.a. "Callback Manager") --> Fix all of those trust issues
+
+
+Receive promise
+Register for event listener
+  finish is for success
+  error is for error condition
+
+Way of knowing that something finished so that can do something in response
+Promise system normalizes the behavior of callbacks so that behave in predictable fashion...
+  only resolved once
+  either success or error
+  messages passed / kept
+  exceptions become errors
+  immutable once resolved
+
+function trackCheckout(info) {
+  return new Promise(
+      // attempt to track the checkout
+
+      // if successful then call resolve
+      // otherwise call reject(error)
+  );
+}
+
+**********************************
+
+Flow Control...
+
+doFirstThing
+  then doSecondThing
+  then doThirdThing
+  then complete
+or error  
+
+Chaining Promises...
+
+                        doFirstThing()
+                        .then(function(){
+                          return doSecondThing();
+                        })                      //waits for previous step
+                        .then(function(){
+                          return doThirdThing();
+                        })                      //waits for previous step
+                        .then(function(){
+                          complete,
+                          error
+                        });
+
+                        ................
+
+                        function delay(num) {
+                          return new Promise(function(resolve, reject){
+                            setTimeout(resolve,num);
+                          });
+                        }
+
+                        delay(100)
+                        .then(function(){
+                          return delay(500);
+                        })
+                        .then(function(){
+                          return delay(200);
+                        })
+                        .then(function(){
+                          console.log("All done!");
+                        });

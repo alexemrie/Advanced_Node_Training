@@ -1,0 +1,11 @@
+[1,2,3,4,5].map(function(v){
+  return v * 2;
+});
+//[2,4,6,8,10]
+
+
+[1,2,3,4,5].reduce( function(){}, initialValue)
+[1,2,3,4,5].reduce( function(sum, v){
+  return sum + v;
+}, 0);
+//15

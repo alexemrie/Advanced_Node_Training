@@ -20,11 +20,32 @@ function output(text) {
 // **************************************
 // The old-n-busted callback way
 
+//what if we had 1000's of files to process? Using map would help.
+
 function getFile(file) {
 	return new Promise(function(resolve){
 		fakeAjax(file,resolve);
 	});
 }
+
+["file1","file2","file3"]
+.map(getFile)
+.reduce(
+	function(promiseChain,filePromise){
+		return promiseChain
+			.then(function(){
+				return filePromise;
+			})
+			.then(output);
+	},
+	Promise.resolve() // fulfilled promise to start chain
+)
+.then(function() {
+	output("Complete!");
+});
+
+
+
 
 // Request all files at once in
 // "parallel" via `getFile(..)`.
