@@ -22,10 +22,6 @@ function connection(socket) {
 		clearInterval(timer);
 	}
 
-	function getmsg(msg) {
-		io.sockets.emit("broadcast",msg);
-	}
-
 	socket.on("disconnect",disconnect);
 	socket.on("msg",getmsg);
 
@@ -54,4 +50,3 @@ setupRoutes();
 httpserv.listen(port, host);
 
 io.on("connection",connection);
-

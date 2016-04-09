@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>9.html</title>
+  </head>
+
+  <body>
+    <h1>8.html</h1>
+    <script src="jquery.js"></script>
+    <script src="/socket.io/socket.io.js"></script>         /*there is no socket directory?
+                                                            socket io intercepts request, library automatically produces and sends out*/
+    <script>
+      var socket = io("/");                                 //connected to socket in handleSocketConnection
+      socket.on("connect", function(){
+        console.log("hey we connected!");
+      });
+
+      socket.on("disconnect", function() {
+        console.log("boo we disconnected");
+      });
+
+      socket.on("hello", function(msg){
+        console.log(msg);
+      });
+    </script>
+  </body>
+</html>
